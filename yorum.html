@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Ali Rüçhan Köseoğlu Web Sitesi">
+    <meta name="keywords" content="web,html,css">
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>Ali Rüçhan Köseoğlu Kişisel Blog Sayfasıdır</title>
+</head>
+<body>
+  <div id="sayfa">
+    <header id="banner">
+      <div id="logo">  <a href="master.html"> <img src="home.png" id="analogo"
+        alt="Ali Rüçhan" title="Ali Rüçhan"></a>
+      </div>
+      <div id="sosyal">
+        <a href="#"><img id="ikon" src="face.png"></a>
+        <a href="https://www.instagram.com/ali.ruchan/"><img id="ikon" src="ins.png"></a>
+        <a href="https://www.linkedin.com/in/ali-rüçhan-köseoğlu-148520177/"><img id="ikon" src="lin.png"></a>
+      </div>
+
+    </header>
+    <nav id="anamenu">
+      <ul>
+        <li><a href="master.html">Hakkımda</a></li>
+        <li><a href="past.html">Projelerim</a></li>
+        <li><a href="yorum.html">Yorumlar </a></li>
+        <li><a href="iletisim.html">İletişim </a></li>
+      </ul>
+
+    </nav>
+    <article id="icerik">
+      <img class="resim" src="bilgisayar.png" alt="bilgisayar" title="bilgisayar">
+      <h1 class="yanbaslik">Yorum Yapın</h1>
+      <div id="todo-list-example">
+        <form v-on:submit.prevent="addNewTodo">
+          <label for="new-todo">Yorum Ekle</label>
+          <input
+            v-model="newTodoText"
+            id="new-todo"
+            placeholder="Yorum yapmak isterseniz yazın"
+          >
+          <button>Ekle</button>
+        </form>
+        <ul>
+          <li
+            is="todo-item"
+            v-for="(todo, index) in todos"
+            v-bind:key="todo.id"
+            v-bind:title="todo.title"
+            v-on:remove="todos.splice(index, 1)"
+          ></li>
+        </ul>
+      </div>
+
+    </article>
+    <aside id="yanmenu">
+      <h6 class="yanbaslik">Web</h6>
+      <p>HTMM, CSS, JavaScript, Jquery, Vue.js, Angular.js, React.Js</p>
+      <h6 class="yanbaslik">OOP</h6>
+      <p>ASP.NET MVC Core, Java Spring Boot, Hibernate, Maven</p>
+      <h6 class="yanbaslik">Veri Tabanı</h6>
+      <p>MSSQL, MYSQL, PostgreSQL, NoSql </p>
+    </aside>
+    <footer id="altmenu">
+        <a href="master.html">Hakkımda</a>∆
+        <a href="past.html">Projelerim</a>∆
+        <a href="yorum.html">Yorumlar </a>∆
+        <a href="iletisim.html">İletişim </a>
+        <br>
+        <h6>Ali Rüçhan Köseoğlu tarafından yapılmıştır.</h6>
+
+    </footer>
+
+</div>
+    
+</body>
+<script>
+Vue.component('todo-item', {
+  template: '\
+    <li>\
+      {{ title }}\
+      <button v-on:click="$emit(\'remove\')">Çıkar</button>\
+    </li>\
+  ',
+  props: ['title']
+})
+
+new Vue({
+  el: '#todo-list-example',
+  data: {
+    newTodoText: '',
+    todos: [
+      
+    ],
+    nextTodoId: 4
+  },
+  methods: {
+    addNewTodo: function () {
+      this.todos.push({
+        id: this.nextTodoId++,
+        title: this.newTodoText
+      })
+      this.newTodoText = ''
+    }
+  }
+})
+</script>
+</html>
